@@ -1,4 +1,4 @@
-package dct.web.shoppinglistandroid
+package dct.web.shoppinglistandroid.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
