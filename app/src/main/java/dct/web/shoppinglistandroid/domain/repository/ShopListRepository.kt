@@ -1,5 +1,6 @@
-package dct.web.shoppinglistandroid.domain
+package dct.web.shoppinglistandroid.domain.repository
 
+import androidx.lifecycle.LiveData
 import dct.web.shoppinglistandroid.domain.entity.ShopItem
 
 interface ShopListRepository {
@@ -12,6 +13,6 @@ interface ShopListRepository {
 
     fun getShopItemById(shopItemId: Int): ShopItem
 
-    fun getShopList(): List<ShopItem>
+    fun getShopList(): LiveData<List<ShopItem>>
 
 }

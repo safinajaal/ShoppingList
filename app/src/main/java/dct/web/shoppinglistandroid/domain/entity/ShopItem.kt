@@ -4,9 +4,9 @@ import lombok.Data
 
 //@Data
 data class ShopItem(
-    private var name: String,
-    private var count: Int,
-    private var enables: Boolean,
+    public var name: String,
+    public var count: Int,
+    public var enabled: Boolean,
     private var id: Int = UNDEFINED_ID
 
 
