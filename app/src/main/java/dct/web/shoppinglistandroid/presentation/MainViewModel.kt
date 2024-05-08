@@ -1,6 +1,5 @@
 package dct.web.shoppinglistandroid.presentation
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dct.web.shoppinglistandroid.data.ShopListRepositoryImpl
 import dct.web.shoppinglistandroid.domain.entity.ShopItem

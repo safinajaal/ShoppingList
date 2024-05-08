@@ -9,14 +9,13 @@ object ShopListRepositoryImpl: ShopListRepository {
 
     // Пока храним данные в переменных вместо БД
     // В будущем необходимо переписать, чтобы в методах ниже шла работа с БД
-     private val shopList = mutableListOf<ShopItem>()
-    //private val shopList: List<ShopItem> = mutableListOf()
+     private val shopList = sortedSetOf<ShopItem>({o1, o2 -> o1.getId().compareTo(o2.getId())})
 
     private val shopListLD = MutableLiveData<List<ShopItem>>()
     private var autoIncrementId = 0
 
     init {
-        for (i in 0 until 10) {
+        for (i in 0 until 20) {
             val item = ShopItem("Name $i", i, true)
             createShopItem (item)
         }

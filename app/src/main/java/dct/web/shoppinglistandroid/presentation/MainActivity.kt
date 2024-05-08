@@ -1,64 +1,39 @@
 package dct.web.shoppinglistandroid.presentation
 
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import android.view.LayoutInflater
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
-import dct.web.shoppinglistandroid.ui.theme.ShoppingListAndroidTheme
+import androidx.recyclerview.widget.RecyclerView
+import dct.web.shoppinglistandroid.R
+import dct.web.shoppinglistandroid.data.ShopListAdapter
+import dct.web.shoppinglistandroid.domain.entity.ShopItem
 
 class MainActivity : androidx.activity.ComponentActivity() {
 
     private lateinit var viewModel: MainViewModel
-    private var count = 0
+    private lateinit var adapter: ShopListAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            ShoppingListAndroidTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
-        }
-
+        setContentView(R.layout.activity_main)
+        setupRecyclerView()
         // ViewModelProvider для получения инстанса
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         // Подписываемся
         // Сюда будут прилетать все новые элементы
         viewModel.shopList.observe(this) {
-            Log.d("MainActivityTest", it.toString())
-            if (count == 0) {
-                count++
-                val item = it[0]
-                viewModel.changeEnableState(item)
-            }
+            adapter.shopList = it
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    private fun setupRecyclerView() {
+        val rvShopList = findViewById<RecyclerView>(R.id.rv_shop_list)
+        adapter = ShopListAdapter()
+        rvShopList.adapter = adapter
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ShoppingListAndroidTheme {
-        Greeting("Android")
     }
+
+
 }
